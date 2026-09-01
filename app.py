@@ -40,7 +40,7 @@ class UsuarioList(Resource):
         novo_usuario["id"] = len(usuarios) + 1
         usuarios.append(novo_usuario)
         return novo_usuario, 201
- 
+
 @ns.route("/<int:id>")
 @ns.param("id", "ID do usuário")
 class Usuario(Resource):
@@ -51,7 +51,7 @@ class Usuario(Resource):
             if usuario["id"] == id:
                 return usuario, 200
         return {"message": "Usuário não encontrado"}, 404
- 
+
     @ns.expect(usuario_model)
     @ns.doc('Atualizar um usuário pelo ID')
     def put(self, id):
@@ -61,7 +61,7 @@ class Usuario(Resource):
                 usuario.update(api.payload)
                 return usuario, 200
         return {"message": "Usuário não encontrado"}, 404
- 
+
     @ns.doc('Deletar um usuário pelo ID')
     def delete(self, id):
         """Deletar um usuário pelo ID"""
@@ -70,7 +70,7 @@ class Usuario(Resource):
                 usuarios.remove(usuario)
                 return {"message": "Usuário deletado com sucesso"}, 200
         return {"message": "Usuário não encontrado"}, 404
- 
+
  
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
